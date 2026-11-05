@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f4efe6;
+  --color-paper-2: #ebe4d6;
+  --color-ink: #15130f;
+  --color-ink-2: #5c564b;
+  --color-ink-3: #9a9285;
+  --color-line: #ddd4c3;
+  --color-night: #0f0e0c;
+  --color-pole: #d7372a;
+  --color-pole-ink: #8e1f16;
+  --color-steel: #2b5db8;
+  --color-cream: #f1e3c4;
+  --color-sky: #b8d1ef;
+  --color-moss: #2f6b4f;
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  font-variation-settings: "wdth" 62;
+  font-stretch: 62%;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+}
+
+/* Listras de poste de barbearia: assinatura visual do produto */
+@utility pole-stripes {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--color-pole) 0 14px,
+    var(--color-paper) 14px 28px,
+    var(--color-steel) 28px 42px,
+    var(--color-paper) 42px 56px
+  );
+}
+
+@utility pole-ring {
+  background: conic-gradient(var(--color-pole), var(--color-steel), var(--color-pole), var(--color-steel), var(--color-pole));
+}
+
+@utility busy-stripes {
+  background: repeating-linear-gradient(
+    -45deg,
+    color-mix(in oklab, var(--color-pole) 22%, white) 0 6px,
+    color-mix(in oklab, var(--color-pole) 8%, white) 6px 12px
+  );
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-pole) 35%, transparent);
+}
+
+@utility closed-hatch {
+  background: repeating-linear-gradient(
+    45deg,
+    transparent 0 7px,
+    color-mix(in oklab, var(--color-ink) 6%, transparent) 7px 8px
+  );
+}
+
+@keyframes pole-scroll {
+  to {
+    background-position: 56px 0;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-pole {
+    background-size: 79.2px 79.2px;
+    animation: pole-scroll 2.4s linear infinite;
+  }
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+}
